@@ -18,7 +18,7 @@ public class ProductRepositoryImpl implements ProductRepository {
     public Product getProductById(Integer id) {
         Product value = null;
         for (Product product : productList) {
-            if (product.getId().equals(id - 1)) {
+            if (product.getId().equals(id)) {
                 value = product;
             }
         }
