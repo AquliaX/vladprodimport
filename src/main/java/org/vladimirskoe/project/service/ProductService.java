@@ -1,11 +1,10 @@
 package org.vladimirskoe.project.service;
 
-import org.vladimirskoe.project.dao.ProductRepository;
 import org.vladimirskoe.project.entity.Product;
 
 import java.util.List;
 
-public interface ProductService extends ProductRepository {
+public interface ProductService {
 
     Product addProduct(Product product);
 

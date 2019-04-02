@@ -19,9 +19,9 @@ public class ProductServiceImpl implements ProductService {
     }
 
     public Product addProduct(Product product) {
-        if (product == null)
-            throw new NullPointerException("input null argument");
-        else {
+        if (product == null) {
+            throw new NullProductException("Input value is null and can't be added. ");
+        } else {
             return productRepository.addProduct(product);
         }
     }
@@ -35,9 +35,9 @@ public class ProductServiceImpl implements ProductService {
     }
 
     public Product updateProduct(Product product) {
-        if (product == null)
-            throw new NullPointerException("input null argument");
-        else {
+        if (product == null) {
+            throw new NullProductException("Input value is null and can't be updated.");
+        } else {
             return productRepository.updateProduct(product);
         }
     }
