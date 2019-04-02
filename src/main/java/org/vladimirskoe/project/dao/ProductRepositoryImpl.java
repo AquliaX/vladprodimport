@@ -10,9 +10,10 @@ public class ProductRepositoryImpl implements ProductRepository {
     private List<Product> productList = new ArrayList<Product>();
     private int index = 0;
 
-    public void addProduct(Product product) {
+    public Product addProduct(Product product) {
         product.setId(++index);
         productList.add(product);
+        return product;
     }
 
     public Product getProductById(Integer id) {
@@ -29,8 +30,7 @@ public class ProductRepositoryImpl implements ProductRepository {
         return productList;
     }
 
-    public void updateProduct(Product product) {
-
+    public Product updateProduct(Product product) {
         int id = product.getId();
         Product value = getProductById(id);
 
@@ -40,6 +40,8 @@ public class ProductRepositoryImpl implements ProductRepository {
         value.setType(product.getType());
         value.setProducer(product.getProducer());
         value.setHcp(product.getHcp());
+
+        return value;
     }
 
     public void deleteProduct(Integer id) {
