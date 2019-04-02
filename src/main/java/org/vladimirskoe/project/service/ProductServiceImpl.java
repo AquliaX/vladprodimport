@@ -5,7 +5,7 @@ import org.vladimirskoe.project.dao.ProductRepository;
 
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.vladimirskoe.project.exception.NullProductException;
+import org.vladimirskoe.project.exception.NullObjectException;
 
 import java.util.List;
 
@@ -21,7 +21,7 @@ public class ProductServiceImpl implements ProductService {
 
     public Product addProduct(Product product) {
         if (product == null) {
-            throw new NullProductException("Input value is null and can't be added. ");
+            throw new NullObjectException("Input value is null and can't be added. ");
         } else {
             return productRepository.addProduct(product);
         }
@@ -37,7 +37,7 @@ public class ProductServiceImpl implements ProductService {
 
     public Product updateProduct(Product product) {
         if (product == null) {
-            throw new NullProductException("Input value is null and can't be updated.");
+            throw new NullObjectException("Input value is null and can't be updated.");
         } else {
             return productRepository.updateProduct(product);
         }

@@ -10,9 +10,10 @@ public class PackageRepositoryImpl implements PackageRepository {
     private List<Package> packageList = new ArrayList<Package>();
     private int index = 0;
 
-    public void addPackage(Package pack) {
+    public Package addPackage(Package pack) {
         pack.setId(++index);
         packageList.add(pack);
+        return pack;
     }
 
     public Package getPackageById(Integer id) {
@@ -29,13 +30,15 @@ public class PackageRepositoryImpl implements PackageRepository {
         return packageList;
     }
 
-    public void updatePackage(Package pack) {
+    public Package updatePackage(Package pack) {
         int id = pack.getId();
         Package value = getPackageById(id);
 
         value.setName(pack.getName());
         value.setAmount(pack.getAmount());
         value.setProduct(pack.getProduct());
+
+        return value;
     }
 
     public void deletePackage(Integer id) {
