@@ -1,10 +1,10 @@
-package org.vladimirskoe.project.dao;
+package org.vladimirskoe.project.service;
 
 import org.vladimirskoe.project.entity.Package;
 
 import java.util.List;
 
-public interface PackageRepository {
+public interface PackageService {
 
     Package addPackage(Package pack);
 
