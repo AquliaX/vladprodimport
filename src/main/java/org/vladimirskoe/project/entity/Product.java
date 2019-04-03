@@ -9,14 +9,6 @@ public class Product {
     private String producer;
     private Double hcp;
 
-    public Double getHcp() {
-        return hcp;
-    }
-
-    public void setHcp(Double hcp) {
-        this.hcp = hcp;
-    }
-
     public Integer getId() {
         return id;
     }
@@ -63,5 +55,13 @@ public class Product {
 
     public void setProducer(String producer) {
         this.producer = producer;
+    }
+
+    public Double getHcp() {
+        return hcp;
+    }
+
+    public void setHcp(Double hcp) {
+        this.hcp = hcp;
     }
 }
