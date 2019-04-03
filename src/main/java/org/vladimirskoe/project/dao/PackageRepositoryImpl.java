@@ -1,13 +1,15 @@
 package org.vladimirskoe.project.dao;
 
+import org.springframework.stereotype.Repository;
 import org.vladimirskoe.project.entity.Package;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository
 public class PackageRepositoryImpl implements PackageRepository {
 
-    private List<Package> packageList = new ArrayList<Package>();
+    private List<Package> packageList = new ArrayList<>();
     private int index = 0;
 
     public Package addPackage(Package pack) {

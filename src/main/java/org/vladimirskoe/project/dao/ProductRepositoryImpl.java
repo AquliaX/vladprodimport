@@ -1,13 +1,15 @@
 package org.vladimirskoe.project.dao;
 
+import org.springframework.stereotype.Repository;
 import org.vladimirskoe.project.entity.Product;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository
 public class ProductRepositoryImpl implements ProductRepository {
 
-    private List<Product> productList = new ArrayList<Product>();
+    private List<Product> productList = new ArrayList<>();
     private int index = 0;
 
     public Product addProduct(Product product) {
