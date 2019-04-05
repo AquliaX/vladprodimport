@@ -32,8 +32,8 @@ public class ProductRepositoryImpl implements ProductRepository {
         return productList;
     }
 
-    public Product updateProduct(Product product) {
-        int id = product.getId();
+    public Product updateProduct(Integer id, Product product) {
+       // int id = product.getId();
         Product value = getProductById(id);
 
         value.setName(product.getName());

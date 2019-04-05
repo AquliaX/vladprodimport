@@ -35,11 +35,11 @@ public class ProductServiceImpl implements ProductService {
         return productRepository.getAllProducts();
     }
 
-    public Product updateProduct(Product product) {
+    public Product updateProduct(Integer id, Product product) {
         if (product == null) {
             throw new NullObjectException("Input value is null and can't be updated.");
         } else {
-            return productRepository.updateProduct(product);
+            return productRepository.updateProduct(id,product);
         }
     }
 
