@@ -32,8 +32,8 @@ public class PackageRepositoryImpl implements PackageRepository {
         return packageList;
     }
 
-    public Package updatePackage(Package pack) {
-        int id = pack.getId();
+    public Package updatePackage(Integer id, Package pack) {
+        //int id = pack.getId();
         Package value = getPackageById(id);
 
         value.setName(pack.getName());
