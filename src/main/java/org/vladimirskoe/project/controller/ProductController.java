@@ -5,37 +5,40 @@ import org.springframework.web.bind.annotation.*;
 import org.vladimirskoe.project.entity.Product;
 import org.vladimirskoe.project.service.ProductService;
 
-import java.nio.file.Path;
 import java.util.List;
 
 @RestController
-@RequestMapping("/products")
+@RequestMapping(path = "/products", consumes = "application/json", produces = "application/json")
 public class ProductController {
 
-    @Autowired
-    ProductService productService;
+    private ProductService productService;
 
-    @PostMapping(consumes = "application/json", produces = "application/json")
+    @Autowired
+    private ProductController(ProductService productService) {
+        this.productService = productService;
+    }
+
+    @PostMapping
     public Product addProduct(@RequestBody Product product) {
         return productService.addProduct(product);
     }
 
-    @GetMapping(path = "/{id}", consumes = "application/json", produces = "application/json")
+    @GetMapping(path = "/{id}")
     public Product getProductById(@PathVariable Integer id) {
         return productService.getProductById(id);
     }
 
-    @GetMapping(consumes = "application/json", produces = "application/json")
+    @GetMapping
     public List<Product> getAllProducts() {
         return productService.getAllProducts();
     }
 
-    @PutMapping(path = "/{id}", consumes = "application/json", produces = "application/json")
-    public Product updateProduct(@ PathVariable Integer id, @RequestBody Product product) {
+    @PutMapping(path = "/{id}")
+    public Product updateProduct(@PathVariable Integer id, @RequestBody Product product) {
         return productService.updateProduct(id, product);
     }
 
-    @DeleteMapping(path = "/{id}", consumes = "application/json", produces = "application/json")
+    @DeleteMapping(path = "/{id}")
     public void deleteProduct(@PathVariable Integer id) {
         productService.deleteProduct(id);
     }
