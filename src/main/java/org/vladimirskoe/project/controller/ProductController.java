@@ -23,7 +23,7 @@ public class ProductController {
         return productService.addProduct(product);
     }
 
-    @GetMapping(path = "/{id}")
+    @GetMapping("/{id}")
     public Product getProductById(@PathVariable Integer id) {
         return productService.getProductById(id);
     }
@@ -33,12 +33,12 @@ public class ProductController {
         return productService.getAllProducts();
     }
 
-    @PutMapping(path = "/{id}")
+    @PutMapping("/{id}")
     public Product updateProduct(@PathVariable Integer id, @RequestBody Product product) {
         return productService.updateProduct(id, product);
     }
 
-    @DeleteMapping(path = "/{id}")
+    @DeleteMapping("/{id}")
     public void deleteProduct(@PathVariable Integer id) {
         productService.deleteProduct(id);
     }

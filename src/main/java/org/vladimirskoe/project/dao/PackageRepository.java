@@ -12,7 +12,7 @@ public interface PackageRepository {
 
     List<Package> getAllPackages();
 
-    Package updatePackage(Package pack);
+    Package updatePackage(Integer id, Package pack);
 
     void deletePackage(Integer id);
 }

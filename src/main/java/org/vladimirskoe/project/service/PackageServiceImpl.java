@@ -35,11 +35,11 @@ public class PackageServiceImpl implements PackageService {
         return packageRepository.getAllPackages();
     }
 
-    public Package updatePackage(Package pack) {
+    public Package updatePackage(Integer id, Package pack) {
         if (pack == null) {
             throw new NullObjectException("Input value is null and can't be updated. ");
         } else {
-            return packageRepository.updatePackage(pack);
+            return packageRepository.updatePackage(id, pack);
         }
     }
 
