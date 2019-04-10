@@ -13,25 +13,18 @@ public class Product {
 
     @Id
     @GeneratedValue
-    @Column(name = "product_id")
     private Integer id;
 
-    @Column(name = "name")
     private String name;
 
-    @Column(name = "price")
     private Double price;
 
-    @Column(name = "weight")
     private Integer weight;
 
-    @Column(name = "type")
     private String type;
 
-    @Column(name = "producer")
     private String producer;
 
-    @Column(name = "hcp")
     private Double hcp;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "product", cascade = {CascadeType.REMOVE, CascadeType.REFRESH})
@@ -138,17 +131,16 @@ public class Product {
         if (obj.getClass() != getClass()) {
             return false;
         }
-        Product quiz = (Product) obj;
+        Product product = (Product) obj;
 
         return new EqualsBuilder()
-                .appendSuper(super.equals(obj))
-                .append(id, quiz.id)
-                .append(name, quiz.name)
-                .append(price, quiz.price)
-                .append(weight, quiz.weight)
-                .append(type, quiz.type)
-                .append(producer, quiz.producer)
-                .append(hcp, quiz.hcp)
+                .append(id, product.id)
+                .append(name, product.name)
+                .append(price, product.price)
+                .append(weight, product.weight)
+                .append(type, product.type)
+                .append(producer, product.producer)
+                .append(hcp, product.hcp)
                 .isEquals();
     }
 }

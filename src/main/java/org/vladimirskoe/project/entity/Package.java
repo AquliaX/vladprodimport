@@ -14,14 +14,12 @@ public class Package {
     @GeneratedValue
     private Integer id;
 
-    @Column(name = "name")
     private String name;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "product_id", nullable = false)
     private Product product;
 
-    @Column(name = "amount")
     private Integer amount;
 
     public Integer getId() {
@@ -87,14 +85,13 @@ public class Package {
         if (obj.getClass() != getClass()) {
             return false;
         }
-        Package quiz = (Package) obj;
+        Package pack = (Package) obj;
 
         return new EqualsBuilder()
-                .appendSuper(super.equals(obj))
-                .append(id, quiz.id)
-                .append(name, quiz.name)
-                .append(product, quiz.product)
-                .append(amount, quiz.amount)
+                .append(id, pack.id)
+                .append(name, pack.name)
+                .append(product, pack.product)
+                .append(amount, pack.amount)
                 .isEquals();
     }
 }
