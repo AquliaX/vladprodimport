@@ -1,34 +1,33 @@
 package org.vladimirskoe.project.entity;
 
+import java.util.Set;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
-
-import javax.persistence.*;
-import java.util.Set;
 
 @Entity
 @Table(name = "Products")
 public class Product {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
     private String name;
-
     private Double price;
-
     private Integer weight;
-
     private String type;
-
     private String producer;
-
     private Double hcp;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "product", cascade = {CascadeType.REMOVE, CascadeType.REFRESH})
-    private Set<Package> packageSet;
+    @OneToMany(mappedBy = "product", orphanRemoval = true)
+    // transient for avoiding recursive invoking, temporarily
+    private transient Set<Package> packageSet;
 
     public Integer getId() {
         return id;
