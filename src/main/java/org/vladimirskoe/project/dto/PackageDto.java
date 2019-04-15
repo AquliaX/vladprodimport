@@ -1,12 +1,10 @@
 package org.vladimirskoe.project.dto;
 
-import org.vladimirskoe.project.entity.Product;
-
 public class PackageDto {
 
     private Integer id;
     private String name;
-    private Product product;
+    private Integer productId;
     private Integer amount;
 
     public Integer getId() {
@@ -25,12 +23,12 @@ public class PackageDto {
         this.name = name;
     }
 
-    public Product getProduct() {
-        return product;
+    public Integer getProductId() {
+        return productId;
     }
 
-    public void setProduct(Product product) {
-        this.product = product;
+    public void setProductId(Integer productId) {
+        this.productId = productId;
     }
 
     public Integer getAmount() {
