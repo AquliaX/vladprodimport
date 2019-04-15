@@ -4,7 +4,7 @@ public class PackageDto {
 
     private Integer id;
     private String name;
-    private Integer productId;
+    private ProductDto productDto;
     private Integer amount;
 
     public Integer getId() {
@@ -23,12 +23,12 @@ public class PackageDto {
         this.name = name;
     }
 
-    public Integer getProductId() {
-        return productId;
+    public ProductDto getProductDto() {
+        return productDto;
     }
 
-    public void setProductId(Integer productId) {
-        this.productId = productId;
+    public void setProductDto(ProductDto productDto) {
+        this.productDto = productDto;
     }
 
     public Integer getAmount() {
