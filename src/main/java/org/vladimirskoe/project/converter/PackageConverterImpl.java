@@ -9,16 +9,15 @@ import org.vladimirskoe.project.entity.Package;
 @Component
 public class PackageConverterImpl implements PackageConverter {
 
-    private ProductConverterImpl productConverter;
+    private ProductConverter productConverter;
 
     @Autowired
-    private PackageConverterImpl(ProductConverterImpl productConverter) {
+    private PackageConverterImpl(ProductConverter productConverter) {
         this.productConverter = productConverter;
     }
 
     @Override
     public PackageDto fromPackageToDto(Package pack) {
-
         PackageDto packageDto = new PackageDto();
         BeanUtils.copyProperties(pack, packageDto, "product");
         packageDto.setProductDto(productConverter.fromProductToDto(pack.getProduct()));
