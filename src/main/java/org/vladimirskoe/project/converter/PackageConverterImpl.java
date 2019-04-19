@@ -20,15 +20,15 @@ public class PackageConverterImpl implements PackageConverter {
     public PackageDto fromPackageToDto(Package pack) {
         PackageDto packageDto = new PackageDto();
         BeanUtils.copyProperties(pack, packageDto, "product");
-        packageDto.setProductDto(productConverter.fromProductToDto(pack.getProduct()));
+        packageDto.setProduct(productConverter.fromProductToDto(pack.getProduct()));
         return packageDto;
     }
 
     @Override
     public Package fromDtoToPackage(PackageDto packageDto) {
         Package pack = new Package();
-        BeanUtils.copyProperties(packageDto, pack, "productDto");
-        pack.setProduct(productConverter.fromDtoToProduct(packageDto.getProductDto()));
+        BeanUtils.copyProperties(packageDto, pack, "product");
+        pack.setProduct(productConverter.fromDtoToProduct(packageDto.getProduct()));
         return pack;
     }
 }
