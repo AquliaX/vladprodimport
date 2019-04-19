@@ -40,11 +40,14 @@ public class PackageController {
 
     @GetMapping
     public List<PackageDto> getAllPackages() {
-        return packageService.getAllPackages().stream().map(pack -> packageConverter.fromPackageToDto(pack)).collect(Collectors.toList());
+        return packageService.getAllPackages()
+                .stream()
+                .map(pack -> packageConverter.fromPackageToDto(pack))
+                .collect(Collectors.toList());
     }
 
     @PutMapping("/{id}")
-    @ResponseStatus(HttpStatus.ACCEPTED)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void updatePackage(@PathVariable Integer id, @RequestBody PackageDto packageDto) {
         Package pack = packageConverter.fromDtoToPackage(packageDto);
         packageService.updatePackage(id, pack);
