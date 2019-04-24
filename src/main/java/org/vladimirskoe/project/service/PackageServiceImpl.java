@@ -1,13 +1,12 @@
 package org.vladimirskoe.project.service;
 
-import org.vladimirskoe.project.dao.PackageRepository;
-
-import org.springframework.stereotype.Service;
+import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.vladimirskoe.project.dao.PackageRepository;
 import org.vladimirskoe.project.entity.Package;
 import org.vladimirskoe.project.exception.NullObjectException;
-
-import java.util.List;
 
 @Service
 public class PackageServiceImpl implements PackageService {
@@ -19,31 +18,38 @@ public class PackageServiceImpl implements PackageService {
         this.packageRepository = packageRepository;
     }
 
+    @Override
     public Package addPackage(Package pack) {
-        if (pack == null) {
-            throw new NullObjectException("Input value is null and can't be added. ");
-        } else {
-            return packageRepository.addPackage(pack);
-        }
+        return packageRepository.addPackage(pack);
     }
 
+    @Override
     public Package getPackageById(Integer id) {
-        return packageRepository.getPackageById(id);
+        return packageRepository
+                .getPackageById(id)
+                .orElseThrow(() -> new NullObjectException("Package not found"));
     }
 
+    @Override
     public List<Package> getAllPackages() {
         return packageRepository.getAllPackages();
     }
 
+    @Override
     public Package updatePackage(Integer id, Package pack) {
-        if (pack == null) {
-            throw new NullObjectException("Input value is null and can't be updated. ");
-        } else {
-            return packageRepository.updatePackage(id, pack);
+        Optional<Package> optionalPackage = packageRepository.getPackageById(id);
+        if (!optionalPackage.isPresent()) {
+            throw new NullObjectException("Package does not exist and cannot be updated");
         }
+        return packageRepository.updatePackage(pack);
     }
 
+    @Override
     public void deletePackage(Integer id) {
+        Optional<Package> optionalPackage = packageRepository.getPackageById(id);
+        if (!optionalPackage.isPresent()) {
+            throw new NullObjectException("Package does not exist and cannot be deleted");
+        }
         packageRepository.deletePackage(id);
     }
 }
