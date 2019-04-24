@@ -1,6 +1,7 @@
 package org.vladimirskoe.project.dao;
 
 import java.util.List;
+import java.util.Optional;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,7 @@ public class ProductRepositoryImpl implements ProductRepository {
         Assert.notNull(this.sessionFactory, "Session factory cannot be null");
     }
 
+    @Override
     public Product addProduct(Product product) {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
@@ -28,14 +30,16 @@ public class ProductRepositoryImpl implements ProductRepository {
         return product;
     }
 
-    public Product getProductById(Integer id) {
+    @Override
+    public Optional<Product> getProductById(Integer id) {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
         Product product = session.get(Product.class, id);
         session.getTransaction().commit();
-        return product;
+        return Optional.ofNullable(product);
     }
 
+    @Override
     public List<Product> getAllProducts() {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
@@ -44,15 +48,16 @@ public class ProductRepositoryImpl implements ProductRepository {
         return products;
     }
 
-    public Product updateProduct(Integer id, Product product) {
+    @Override
+    public Product updateProduct(Product product) {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
-        product.setId(id);
-        session.saveOrUpdate(product);
+        session.update(product);
         session.getTransaction().commit();
         return product;
     }
 
+    @Override
     public void deleteProduct(Integer id) {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
