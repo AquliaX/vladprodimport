@@ -1,18 +1,18 @@
 package org.vladimirskoe.project.dao;
 
-import org.vladimirskoe.project.entity.Package;
-
 import java.util.List;
+import java.util.Optional;
+import org.vladimirskoe.project.entity.Package;
 
 public interface PackageRepository {
 
     Package addPackage(Package pack);
 
-    Package getPackageById(Integer id);
+    Optional<Package> getPackageById(Integer id);
 
     List<Package> getAllPackages();
 
-    Package updatePackage(Integer id, Package pack);
+    Package updatePackage(Package pack);
 
     void deletePackage(Integer id);
 }
