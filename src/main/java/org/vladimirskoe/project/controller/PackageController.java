@@ -12,7 +12,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping(path = "/packages", consumes = "application/json", produces = "application/json")
+@RequestMapping("/packages")
+@CrossOrigin
 public class PackageController {
 
     private PackageConverter packageConverter;

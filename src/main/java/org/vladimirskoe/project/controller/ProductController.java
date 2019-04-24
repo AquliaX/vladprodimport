@@ -12,7 +12,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping(path = "/products", consumes = "application/json", produces = "application/json")
+@RequestMapping("/products")
+@CrossOrigin
 public class ProductController {
 
     private ProductService productService;
