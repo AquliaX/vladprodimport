@@ -1,20 +1,10 @@
 package org.vladimirskoe.project.dao;
 
-import java.util.Optional;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 import org.vladimirskoe.project.entity.Product;
 
-import java.util.List;
-
-public interface ProductRepository {
-
-    Product addProduct(Product product);
-
-    Optional<Product> getProductById(Integer id);
-
-    List<Product> getAllProducts();
-
-    Product updateProduct(Product product);
-
-    void deleteProduct(Integer id);
+@Repository
+public interface ProductRepository extends CrudRepository<Product, Integer> {
 
 }

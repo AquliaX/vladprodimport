@@ -4,9 +4,5 @@ spring:
       enabled: true
 
   jpa:
-    hibernate:
-      ddl-auto: create
-      scan-packages: org.vladimirskoe.project.entity
-      dialect: org.hibernate.dialect.H2Dialect
     show-sql: true
 
