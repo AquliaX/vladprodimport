@@ -1,6 +1,13 @@
 package org.vladimirskoe.project.entity;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "Users")
 public class User {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private String email;
     private String password;
