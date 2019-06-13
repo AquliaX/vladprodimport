@@ -1,6 +1,7 @@
 package org.vladimirskoe.project.entity;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "Users")
@@ -15,6 +16,9 @@ public class User {
     private String name;
     private String surname;
     private String organization;
+
+    @OneToMany(mappedBy = "user", orphanRemoval = true)
+    private transient Set<Order> orderSet;
 
     public Integer getId() {
         return id;
@@ -70,5 +74,13 @@ public class User {
 
     public void setOrganization(String organization) {
         this.organization = organization;
+    }
+
+    public Set<Order> getOrderSet() {
+        return orderSet;
+    }
+
+    public void setOrderSet(Set<Order> orderSet) {
+        this.orderSet = orderSet;
     }
 }
