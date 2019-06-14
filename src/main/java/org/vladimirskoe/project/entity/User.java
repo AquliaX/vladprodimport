@@ -17,7 +17,7 @@ public class User {
     private String surname;
     private String organization;
 
-    @OneToMany(mappedBy = "user", orphanRemoval = true)
+    @OneToMany(mappedBy = "user")
     private transient Set<Order> orderSet;
 
     public Integer getId() {

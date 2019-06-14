@@ -1,6 +1,11 @@
 package org.vladimirskoe.project.entity;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Set;
 
@@ -16,7 +21,7 @@ public class Order {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    private Date dataFormat;
+    private LocalDateTime localDateTime;
 
     private String comment;
 
@@ -41,12 +46,12 @@ public class Order {
         this.user = user;
     }
 
-    public Date getDataFormat() {
-        return dataFormat;
+    public LocalDateTime getLocalDateTime() {
+        return localDateTime;
     }
 
-    public void setDataFormat(Date dataFormat) {
-        this.dataFormat = dataFormat;
+    public void setLocalDateTime(LocalDateTime localDateTime) {
+        this.localDateTime = localDateTime;
     }
 
     public String getComment() {
@@ -71,5 +76,47 @@ public class Order {
 
     public void setOrderItems(Set<OrderItem> orderItems) {
         this.orderItems = orderItems;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Order order = (Order) o;
+
+        return new EqualsBuilder()
+                .append(id, order.id)
+                .append(user, order.user)
+                .append(localDateTime, order.localDateTime)
+                .append(comment, order.comment)
+                .append(state, order.state)
+                .append(orderItems, order.orderItems)
+                .isEquals();
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(17, 37)
+                .append(id)
+                .append(user)
+                .append(localDateTime)
+                .append(comment)
+                .append(state)
+                .append(orderItems)
+                .toHashCode();
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("id", id)
+                .append("user", user)
+                .append("localDateTime", localDateTime)
+                .append("comment", comment)
+                .append("state", state)
+                .append("orderItems", orderItems)
+                .toString();
     }
 }
