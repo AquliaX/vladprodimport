@@ -11,7 +11,7 @@ public class OrderDto {
     private String comment;
     private String state;
 
-    private transient Set<OrderItemDto> orderItems;
+    private  Set<OrderItemDto> orderItems;
 
 
     public Integer getId() {
