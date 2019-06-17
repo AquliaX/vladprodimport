@@ -1,6 +1,6 @@
 package org.vladimirskoe.project.dto;
 
-class OrderItemDto {
+public class OrderItemDto {
 
     private Integer packageId;
     private Integer amount;

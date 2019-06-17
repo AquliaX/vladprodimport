@@ -10,9 +10,7 @@ public class OrderDto {
     private LocalDateTime dateTime;
     private String comment;
     private String state;
-
-    private  Set<OrderItemDto> orderItems;
-
+    private Set<OrderItemDto> orderItems;
 
     public Integer getId() {
         return id;
