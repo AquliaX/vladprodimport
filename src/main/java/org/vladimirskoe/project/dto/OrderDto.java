@@ -1,16 +1,18 @@
 package org.vladimirskoe.project.dto;
 
-import org.vladimirskoe.project.entity.User;
-
 import java.time.LocalDateTime;
+import java.util.Set;
 
 public class OrderDto {
 
     private Integer id;
-    private User user;
+    private Integer userId;
     private LocalDateTime dateTime;
     private String comment;
     private String state;
+
+    private transient Set<OrderItemDto> orderItems;
+
 
     public Integer getId() {
         return id;
@@ -20,12 +22,12 @@ public class OrderDto {
         this.id = id;
     }
 
-    public User getUser() {
-        return user;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
     public LocalDateTime getDateTime() {
@@ -50,5 +52,13 @@ public class OrderDto {
 
     public void setState(String state) {
         this.state = state;
+    }
+
+    public Set<OrderItemDto> getOrderItems() {
+        return orderItems;
+    }
+
+    public void setOrderItems(Set<OrderItemDto> orderItems) {
+        this.orderItems = orderItems;
     }
 }

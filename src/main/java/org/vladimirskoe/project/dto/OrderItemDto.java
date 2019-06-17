@@ -1,37 +1,16 @@
 package org.vladimirskoe.project.dto;
 
-import org.vladimirskoe.project.entity.Order;
-import org.vladimirskoe.project.entity.Package;
+class OrderItemDto {
 
-public class OrderItemDto {
-
-    private Integer id;
-    private Order order;
-    private Package pack;
+    private Integer packageId;
     private Integer amount;
 
-    public Integer getId() {
-        return id;
+    public Integer getPackageId() {
+        return packageId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Order getOrder() {
-        return order;
-    }
-
-    public void setOrder(Order order) {
-        this.order = order;
-    }
-
-    public Package getPack() {
-        return pack;
-    }
-
-    public void setPack(Package pack) {
-        this.pack = pack;
+    public void setPackageId(Integer packageId) {
+        this.packageId = packageId;
     }
 
     public Integer getAmount() {
