@@ -1,6 +1,5 @@
 package org.vladimirskoe.project.converter.implementation;
 
-import org.springframework.beans.BeanUtils;
 import org.vladimirskoe.project.converter.OrderItemConverter;
 import org.vladimirskoe.project.dto.OrderItemDto;
 import org.vladimirskoe.project.entity.OrderItem;
@@ -10,7 +9,7 @@ public class OrderItemConverterImpl implements OrderItemConverter {
     @Override
     public OrderItemDto fromOrderItemToDto(OrderItem orderItem) {
         OrderItemDto orderItemDto = new OrderItemDto();
-        BeanUtils.copyProperties(orderItem, orderItemDto, "pack");
+        orderItemDto.setAmount(orderItem.getAmount());
         orderItemDto.setPackageId(orderItem.getPack().getId());
         return orderItemDto;
     }
@@ -18,10 +17,12 @@ public class OrderItemConverterImpl implements OrderItemConverter {
     @Override
     public OrderItem fromDtoToOrderItem(OrderItemDto orderItemDto) {
         OrderItem orderItem = new OrderItem();
-        BeanUtils.copyProperties(orderItemDto, orderItem, "packageId");
         Package pack = new Package();
         pack.setId(orderItemDto.getPackageId());
         orderItem.setPack(pack);
+
+        pack.setAmount(orderItemDto.getAmount());
+
         return orderItem;
     }
 }
