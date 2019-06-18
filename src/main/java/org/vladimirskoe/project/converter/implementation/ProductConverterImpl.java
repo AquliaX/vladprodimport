@@ -1,7 +1,8 @@
-package org.vladimirskoe.project.converter;
+package org.vladimirskoe.project.converter.implementation;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
+import org.vladimirskoe.project.converter.ProductConverter;
 import org.vladimirskoe.project.dto.ProductDto;
 import org.vladimirskoe.project.entity.Product;
 

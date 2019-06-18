@@ -1,5 +1,8 @@
 package org.vladimirskoe.project.entity;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -82,5 +85,39 @@ public class User {
 
     public void setOrderSet(Set<Order> orderSet) {
         this.orderSet = orderSet;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+
+        if (o == null || getClass() != o.getClass()) return false;
+
+        User user = (User) o;
+
+        return new EqualsBuilder()
+                .append(id, user.id)
+                .append(email, user.email)
+                .append(password, user.password)
+                .append(phone, user.phone)
+                .append(name, user.name)
+                .append(surname, user.surname)
+                .append(organization, user.organization)
+                .append(orderSet, user.orderSet)
+                .isEquals();
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(17, 37)
+                .append(id)
+                .append(email)
+                .append(password)
+                .append(phone)
+                .append(name)
+                .append(surname)
+                .append(organization)
+                .append(orderSet)
+                .toHashCode();
     }
 }
