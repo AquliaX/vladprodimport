@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.vladimirskoe.project.dao.OrderRepository;
 import org.vladimirskoe.project.entity.Order;
+import org.vladimirskoe.project.entity.User;
 import org.vladimirskoe.project.exception.NullObjectException;
 import org.vladimirskoe.project.service.OrderService;
 
@@ -27,6 +28,10 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Order addOrder(final Order order) {
+        //add tmp User for order due to lack of implementation
+        User user = new User();
+        user.setId(1);
+        order.setUser(user);
         order.setDateTime(LocalDateTime.now());
         order.setOrderItems(order.getOrderItems()
                 .stream()

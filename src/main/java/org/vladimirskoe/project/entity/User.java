@@ -114,7 +114,6 @@ public class User {
                 .append(name, user.name)
                 .append(surname, user.surname)
                 .append(organization, user.organization)
-//                .append(orderSet, user.orderSet)
                 .isEquals();
     }
 
@@ -128,7 +127,6 @@ public class User {
                 .append(name)
                 .append(surname)
                 .append(organization)
-//                .append(orderSet)
                 .toHashCode();
     }
 }
