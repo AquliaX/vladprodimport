@@ -4,6 +4,7 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -11,7 +12,7 @@ import java.util.Set;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String email;
     private String password;
@@ -21,7 +22,7 @@ public class User {
     private String organization;
 
     @OneToMany(mappedBy = "user")
-    private transient Set<Order> orderSet;
+    private Set<Order> orderSet = new HashSet<>();
 
     public Integer getId() {
         return id;
@@ -87,6 +88,16 @@ public class User {
         this.orderSet = orderSet;
     }
 
+    public void addOrder(Order order) {
+        order.setUser(this);
+        orderSet.add(order);
+    }
+
+    public void removeOrder(Order order) {
+        order.setUser(null);
+        orderSet.remove(order);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -103,7 +114,7 @@ public class User {
                 .append(name, user.name)
                 .append(surname, user.surname)
                 .append(organization, user.organization)
-                .append(orderSet, user.orderSet)
+//                .append(orderSet, user.orderSet)
                 .isEquals();
     }
 
@@ -117,7 +128,7 @@ public class User {
                 .append(name)
                 .append(surname)
                 .append(organization)
-                .append(orderSet)
+//                .append(orderSet)
                 .toHashCode();
     }
 }

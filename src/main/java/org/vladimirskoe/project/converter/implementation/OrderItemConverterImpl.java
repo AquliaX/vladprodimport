@@ -1,10 +1,12 @@
 package org.vladimirskoe.project.converter.implementation;
 
+import org.springframework.stereotype.Component;
 import org.vladimirskoe.project.converter.OrderItemConverter;
 import org.vladimirskoe.project.dto.OrderItemDto;
 import org.vladimirskoe.project.entity.OrderItem;
 import org.vladimirskoe.project.entity.Package;
 
+@Component
 public class OrderItemConverterImpl implements OrderItemConverter {
     @Override
     public OrderItemDto fromOrderItemToDto(OrderItem orderItem) {
@@ -21,7 +23,7 @@ public class OrderItemConverterImpl implements OrderItemConverter {
         pack.setId(orderItemDto.getPackageId());
         orderItem.setPack(pack);
 
-        pack.setAmount(orderItemDto.getAmount());
+        orderItem.setAmount(orderItemDto.getAmount());
 
         return orderItem;
     }

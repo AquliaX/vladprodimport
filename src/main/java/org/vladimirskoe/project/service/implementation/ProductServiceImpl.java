@@ -1,4 +1,4 @@
-package org.vladimirskoe.project.service;
+package org.vladimirskoe.project.service.implementation;
 
 import java.util.List;
 import java.util.Optional;
@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.vladimirskoe.project.dao.ProductRepository;
 import org.vladimirskoe.project.entity.Product;
 import org.vladimirskoe.project.exception.NullObjectException;
+import org.vladimirskoe.project.service.ProductService;
 
 @Service
 public class ProductServiceImpl implements ProductService {
