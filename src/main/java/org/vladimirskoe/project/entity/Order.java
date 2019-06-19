@@ -6,6 +6,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -13,10 +14,10 @@ import java.util.Set;
 public class Order {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
@@ -27,8 +28,8 @@ public class Order {
 
     private String state;
 
-    @OneToMany(mappedBy = "order", orphanRemoval = true)
-    private transient Set<OrderItem> orderItems;
+    @OneToMany(mappedBy = "order", orphanRemoval = true, cascade = {CascadeType.ALL})
+    private Set<OrderItem> orderItems = new HashSet<>();
 
     public Integer getId() {
         return id;
@@ -78,6 +79,16 @@ public class Order {
         this.orderItems = orderItems;
     }
 
+    public void addOrderItem(OrderItem item) {
+        item.setOrder(this);
+        orderItems.add(item);
+    }
+
+    public void removeOrderItem(OrderItem item) {
+        orderItems.remove(item);
+        item.setOrder(null);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -92,7 +103,6 @@ public class Order {
                 .append(dateTime, order.dateTime)
                 .append(comment, order.comment)
                 .append(state, order.state)
-                .append(orderItems, order.orderItems)
                 .isEquals();
     }
 
@@ -104,7 +114,6 @@ public class Order {
                 .append(dateTime)
                 .append(comment)
                 .append(state)
-                .append(orderItems)
                 .toHashCode();
     }
 

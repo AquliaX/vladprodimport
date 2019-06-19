@@ -2,15 +2,16 @@ package org.vladimirskoe.project.converter.implementation;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.vladimirskoe.project.converter.OrderConverter;
 import org.vladimirskoe.project.converter.OrderItemConverter;
 import org.vladimirskoe.project.dto.OrderDto;
 import org.vladimirskoe.project.entity.Order;
 import org.vladimirskoe.project.entity.User;
 
-
 import java.util.stream.Collectors;
 
+@Component
 public class OrderConverterImpl implements OrderConverter {
 
     private OrderItemConverter orderItemConverter;
@@ -45,7 +46,9 @@ public class OrderConverterImpl implements OrderConverter {
         order.setComment(orderDto.getComment());
         order.setDateTime(orderDto.getDateTime());
         order.setState(orderDto.getState());
-        order.setOrderItems(orderDto.getOrderItems().stream()
+        order.setOrderItems(orderDto
+                .getOrderItems()
+                .stream()
                 .map(orderItemConverter::fromDtoToOrderItem)
                 .collect(Collectors.toSet()));
         return order;

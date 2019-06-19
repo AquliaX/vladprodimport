@@ -17,7 +17,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 public class Product {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
     private Double price;
@@ -27,8 +27,7 @@ public class Product {
     private Double hcp;
 
     @OneToMany(mappedBy = "product", orphanRemoval = true)
-    // transient for avoiding recursive invoking, temporarily
-    private transient Set<Package> packageSet;
+    private Set<Package> packageSet;
 
     public Integer getId() {
         return id;

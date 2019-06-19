@@ -1,12 +1,14 @@
-package org.vladimirskoe.project.service;
+package org.vladimirskoe.project.service.implementation;
 
 import java.util.List;
 import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.vladimirskoe.project.dao.PackageRepository;
 import org.vladimirskoe.project.entity.Package;
 import org.vladimirskoe.project.exception.NullObjectException;
+import org.vladimirskoe.project.service.PackageService;
 
 @Service
 public class PackageServiceImpl implements PackageService {
