@@ -3,6 +3,7 @@ package org.vladimirskoe.project.service.implementation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.vladimirskoe.project.dao.OrderRepository;
+import org.vladimirskoe.project.dao.UserRepository;
 import org.vladimirskoe.project.entity.Order;
 import org.vladimirskoe.project.entity.User;
 import org.vladimirskoe.project.exception.NullObjectException;
@@ -17,6 +18,8 @@ import java.util.stream.Collectors;
 public class OrderServiceImpl implements OrderService {
 
     private OrderRepository orderRepository;
+    @Autowired
+    private UserRepository userRepository;
 
     public OrderServiceImpl() {
     }
@@ -57,6 +60,8 @@ public class OrderServiceImpl implements OrderService {
         if (!optionalOrder.isPresent()) {
             throw new NullObjectException("Order does not exist and cannot be updated");
         }
+        order.setUser(optionalOrder.get().getUser());
+        order.setDateTime(optionalOrder.get().getDateTime());
         order.setOrderItems(order.getOrderItems()
                 .stream()
                 .peek(orderItem -> orderItem.setOrder(order))
