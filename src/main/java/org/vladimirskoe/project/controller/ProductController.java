@@ -48,7 +48,6 @@ public class ProductController {
     }
 
     @PutMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
     public ProductDto updateProduct(@PathVariable Integer id, @RequestBody ProductDto productDto) {
         Product product = productConverter.fromDtoToProduct(productDto);
         productService.updateProduct(id, product);

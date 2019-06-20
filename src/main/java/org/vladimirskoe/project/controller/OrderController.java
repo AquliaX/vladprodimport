@@ -48,7 +48,6 @@ public class OrderController {
     }
 
     @PutMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
     public OrderDto updateOrder(@PathVariable Integer id, @RequestBody OrderDto orderDto) {
         Order order = orderConverter.fromDtoToOrder(orderDto);
         orderService.updateOrder(id, order);

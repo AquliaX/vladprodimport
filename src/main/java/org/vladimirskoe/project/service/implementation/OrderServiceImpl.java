@@ -57,8 +57,9 @@ public class OrderServiceImpl implements OrderService {
         if (!optionalOrder.isPresent()) {
             throw new NullObjectException("Order does not exist and cannot be updated");
         }
-        order.setUser(optionalOrder.get().getUser());
-        order.setDateTime(optionalOrder.get().getDateTime());
+        Order orderFromOptional = optionalOrder.get();
+        order.setUser(orderFromOptional.getUser());
+        order.setDateTime(orderFromOptional.getDateTime());
         order.setOrderItems(order.getOrderItems()
                 .stream()
                 .peek(orderItem -> orderItem.setOrder(order))

@@ -48,7 +48,6 @@ public class PackageController {
     }
 
     @PutMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
     public PackageDto updatePackage(@PathVariable Integer id, @RequestBody PackageDto packageDto) {
         Package pack = packageConverter.fromDtoToPackage(packageDto);
         packageService.updatePackage(id, pack);
