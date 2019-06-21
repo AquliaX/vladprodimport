@@ -1,12 +1,7 @@
 package org.vladimirskoe.project.entity;
 
 import java.util.Set;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -26,7 +21,7 @@ public class Product {
     private String producer;
     private Double hcp;
 
-    @OneToMany(mappedBy = "product", orphanRemoval = true)
+    @OneToMany(mappedBy = "product", cascade = CascadeType.REMOVE)
     private Set<Package> packageSet;
 
     public Integer getId() {
