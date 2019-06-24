@@ -1,12 +1,14 @@
-package org.vladimirskoe.project.service;
+package org.vladimirskoe.project.service.implementation;
 
 import java.util.List;
 import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.vladimirskoe.project.dao.PackageRepository;
 import org.vladimirskoe.project.entity.Package;
 import org.vladimirskoe.project.exception.NullObjectException;
+import org.vladimirskoe.project.service.PackageService;
 
 @Service
 public class PackageServiceImpl implements PackageService {
@@ -20,36 +22,36 @@ public class PackageServiceImpl implements PackageService {
 
     @Override
     public Package addPackage(Package pack) {
-        return packageRepository.addPackage(pack);
+        return packageRepository.save(pack);
     }
 
     @Override
     public Package getPackageById(Integer id) {
         return packageRepository
-                .getPackageById(id)
+                .findById(id)
                 .orElseThrow(() -> new NullObjectException("Package not found"));
     }
 
     @Override
     public List<Package> getAllPackages() {
-        return packageRepository.getAllPackages();
+        return (List<Package>) packageRepository.findAll();
     }
 
     @Override
     public Package updatePackage(Integer id, Package pack) {
-        Optional<Package> optionalPackage = packageRepository.getPackageById(id);
+        Optional<Package> optionalPackage = packageRepository.findById(id);
         if (!optionalPackage.isPresent()) {
             throw new NullObjectException("Package does not exist and cannot be updated");
         }
-        return packageRepository.updatePackage(pack);
+        return packageRepository.save(pack);
     }
 
     @Override
     public void deletePackage(Integer id) {
-        Optional<Package> optionalPackage = packageRepository.getPackageById(id);
+        Optional<Package> optionalPackage = packageRepository.findById(id);
         if (!optionalPackage.isPresent()) {
             throw new NullObjectException("Package does not exist and cannot be deleted");
         }
-        packageRepository.deletePackage(id);
+        packageRepository.deleteById(id);
     }
 }

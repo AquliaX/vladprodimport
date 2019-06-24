@@ -48,10 +48,10 @@ public class PackageController {
     }
 
     @PutMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updatePackage(@PathVariable Integer id, @RequestBody PackageDto packageDto) {
+    public PackageDto updatePackage(@PathVariable Integer id, @RequestBody PackageDto packageDto) {
         Package pack = packageConverter.fromDtoToPackage(packageDto);
         packageService.updatePackage(id, pack);
+        return packageConverter.fromPackageToDto(pack);
     }
 
     @DeleteMapping("/{id}")

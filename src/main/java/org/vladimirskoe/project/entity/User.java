@@ -1,6 +1,18 @@
 package org.vladimirskoe.project.entity;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
+
+@Entity
+@Table(name = "Users")
 public class User {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String email;
     private String password;
@@ -8,6 +20,9 @@ public class User {
     private String name;
     private String surname;
     private String organization;
+
+    @OneToMany(mappedBy = "user")
+    private Set<Order> orderSet = new HashSet<>();
 
     public Integer getId() {
         return id;
@@ -63,5 +78,55 @@ public class User {
 
     public void setOrganization(String organization) {
         this.organization = organization;
+    }
+
+    public Set<Order> getOrderSet() {
+        return orderSet;
+    }
+
+    public void setOrderSet(Set<Order> orderSet) {
+        this.orderSet = orderSet;
+    }
+
+    public void addOrder(Order order) {
+        order.setUser(this);
+        orderSet.add(order);
+    }
+
+    public void removeOrder(Order order) {
+        order.setUser(null);
+        orderSet.remove(order);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+
+        if (o == null || getClass() != o.getClass()) return false;
+
+        User user = (User) o;
+
+        return new EqualsBuilder()
+                .append(id, user.id)
+                .append(email, user.email)
+                .append(password, user.password)
+                .append(phone, user.phone)
+                .append(name, user.name)
+                .append(surname, user.surname)
+                .append(organization, user.organization)
+                .isEquals();
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(17, 37)
+                .append(id)
+                .append(email)
+                .append(password)
+                .append(phone)
+                .append(name)
+                .append(surname)
+                .append(organization)
+                .toHashCode();
     }
 }

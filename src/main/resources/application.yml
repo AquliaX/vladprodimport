@@ -1,12 +1,11 @@
 spring:
-  h2:
-    console:
-      enabled: true
-
   jpa:
     hibernate:
-      ddl-auto: create
-      scan-packages: org.vladimirskoe.project.entity
-      dialect: org.hibernate.dialect.H2Dialect
+      ddl-auto: create-drop
     show-sql: true
-
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/vladprodimport_db?autoReconnect=true&useSSL=false
+    username: root
+    password: 10114
+    initialization-mode: always
