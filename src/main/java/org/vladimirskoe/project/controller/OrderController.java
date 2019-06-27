@@ -2,10 +2,14 @@ package org.vladimirskoe.project.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 import org.vladimirskoe.project.converter.OrderConverter;
+import org.vladimirskoe.project.dao.UserRepository;
 import org.vladimirskoe.project.dto.OrderDto;
 import org.vladimirskoe.project.entity.Order;
+import org.vladimirskoe.project.entity.User;
 import org.vladimirskoe.project.service.OrderService;
 
 import java.util.List;
@@ -18,6 +22,8 @@ public class OrderController {
 
     private OrderConverter orderConverter;
     private OrderService orderService;
+    @Autowired
+    private UserRepository userRepository;
 
     @Autowired
     private OrderController(OrderService orderService, OrderConverter orderConverter) {
@@ -27,8 +33,10 @@ public class OrderController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public OrderDto addOrder(@RequestBody OrderDto orderDto) {
+    public OrderDto addOrder(@RequestBody OrderDto orderDto, @AuthenticationPrincipal UserDetails userDetails) {
+        User user = userRepository.findByEmail(userDetails.getUsername()).get();
         Order order = orderConverter.fromDtoToOrder(orderDto);
+        order.setUser(user);
         orderService.addOrder(order);
         return orderConverter.fromOrderToDto(order);
     }
