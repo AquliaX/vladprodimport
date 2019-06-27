@@ -16,7 +16,6 @@ public class User {
     private Integer id;
     private String email;
     private String password;
-    @Column
     @Enumerated
     private UserRole role;
     private String phone;

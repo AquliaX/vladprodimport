@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/packages")
+@RequestMapping("/api/packages")
 @CrossOrigin
 public class PackageController {
 

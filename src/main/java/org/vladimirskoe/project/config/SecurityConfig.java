@@ -19,6 +19,7 @@ import org.vladimirskoe.project.entity.User;
 import org.vladimirskoe.project.security.CustomUserDetailsService;
 import org.vladimirskoe.project.security.JwtAuthenticationEntryPoint;
 import org.vladimirskoe.project.security.JwtAuthenticationFilter;
+import org.vladimirskoe.project.security.JwtTokenProvider;
 
 @Configuration
 @EnableWebSecurity
@@ -28,24 +29,31 @@ import org.vladimirskoe.project.security.JwtAuthenticationFilter;
         prePostEnabled = true
 )
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
     private static final String ROLE_ADMIN = User.UserRole.ADMIN.toString();
     private static final String ROLE_CLIENT = User.UserRole.CLIENT.toString();
     private static final String ROLE_OPERATOR = User.UserRole.OPERATOR.toString();
     private static final String ROLE_MANAGER = User.UserRole.MANAGER.toString();
 
-    @Autowired
     private CustomUserDetailsService customUserDetailsService;
+    private JwtAuthenticationEntryPoint unauthorizedHandler;
+    private JwtTokenProvider jwtTokenProvider;
 
     @Autowired
-    private JwtAuthenticationEntryPoint unauthorizedHandler;
-
+    SecurityConfig(CustomUserDetailsService customUserDetailsService,
+            JwtAuthenticationEntryPoint unauthorizedHandler, JwtTokenProvider jwtTokenProvider){
+        this.customUserDetailsService = customUserDetailsService;
+        this.unauthorizedHandler = unauthorizedHandler;
+        this.jwtTokenProvider = jwtTokenProvider;
+    }
     @Bean
     public JwtAuthenticationFilter jwtAuthenticationFilter() {
-        return new JwtAuthenticationFilter();
+        return new JwtAuthenticationFilter(customUserDetailsService, jwtTokenProvider);
     }
 
     @Override
-    public void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
+    public void configure(AuthenticationManagerBuilder authenticationManagerBuilder)
+            throws Exception {
         authenticationManagerBuilder
                 .userDetailsService(customUserDetailsService)
                 .passwordEncoder(passwordEncoder());
@@ -80,31 +88,31 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/auth/**")
                     .permitAll()
 
-                .antMatchers(HttpMethod.GET, "/products**")
+                .antMatchers(HttpMethod.GET, "api/products**")
                     .authenticated()
-                .antMatchers(HttpMethod.POST, "/products")
+                .antMatchers(HttpMethod.POST, "api/products")
                     .hasAnyAuthority(ROLE_ADMIN, ROLE_MANAGER)
-                .antMatchers(HttpMethod.DELETE, "/products/{id}")
+                .antMatchers(HttpMethod.DELETE, "api/products/{id}")
                      .hasAnyAuthority(ROLE_ADMIN, ROLE_MANAGER)
-                .antMatchers(HttpMethod.PUT, "/products/{id}")
+                .antMatchers(HttpMethod.PUT, "api/products/{id}")
                      .hasAnyAuthority(ROLE_ADMIN, ROLE_MANAGER)
 
-                .antMatchers(HttpMethod.GET, "/packages**")
+                .antMatchers(HttpMethod.GET, "api/packages**")
                     .hasAnyAuthority(ROLE_ADMIN, ROLE_MANAGER, ROLE_CLIENT)
-                .antMatchers(HttpMethod.POST, "/packages")
+                .antMatchers(HttpMethod.POST, "api/packages")
                     .hasAnyAuthority(ROLE_ADMIN, ROLE_MANAGER)
-                .antMatchers(HttpMethod.DELETE, "/packages/{id}")
+                .antMatchers(HttpMethod.DELETE, "api/packages/{id}")
                     .hasAnyAuthority(ROLE_ADMIN, ROLE_MANAGER)
-                .antMatchers(HttpMethod.PUT, "/packages/{id}")
+                .antMatchers(HttpMethod.PUT, "api/packages/{id}")
                      .hasAnyAuthority(ROLE_ADMIN, ROLE_MANAGER)
 
-                .antMatchers(HttpMethod.GET, "/orders**")
+                .antMatchers(HttpMethod.GET, "api/orders**")
                     .hasAnyAuthority(ROLE_ADMIN, ROLE_OPERATOR, ROLE_CLIENT)
-                .antMatchers(HttpMethod.POST, "/orders")
+                .antMatchers(HttpMethod.POST, "api/orders")
                     .hasAnyAuthority(ROLE_ADMIN, ROLE_OPERATOR, ROLE_CLIENT)
-                .antMatchers(HttpMethod.DELETE, "/orders/{id}")
+                .antMatchers(HttpMethod.DELETE, "api/orders/{id}")
                     .hasAnyAuthority(ROLE_ADMIN, ROLE_OPERATOR, ROLE_CLIENT)
-                .antMatchers(HttpMethod.PUT, "/orders/{id}")
+                .antMatchers(HttpMethod.PUT, "api/orders/{id}")
                     .hasAnyAuthority(ROLE_ADMIN, ROLE_OPERATOR, ROLE_CLIENT);
 
         http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
