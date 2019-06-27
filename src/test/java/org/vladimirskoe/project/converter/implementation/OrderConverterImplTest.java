@@ -55,7 +55,7 @@ public class OrderConverterImplTest {
 
         dtoExpected.setOrderItems(setExpected);
 
-        Assert.assertEquals(actual, dtoExpected);
+        Assert.assertEquals(dtoExpected, actual);
     }
 
     @Test
@@ -90,7 +90,7 @@ public class OrderConverterImplTest {
         orderExpected.setUser(user);
         orderExpected.setOrderItems(setExpected);
 
-        Assert.assertEquals(actual, orderExpected);
+        Assert.assertEquals(orderExpected, actual);
 
     }
 }

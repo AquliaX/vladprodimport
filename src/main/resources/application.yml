@@ -9,3 +9,7 @@ spring:
     username: root
     password: 10114
     initialization-mode: always
+app:
+  jwtSecret: JWTSuperSecretKey
+  jwtExpirationInMs: 604800000
+
