@@ -16,6 +16,8 @@ public class User {
     private Integer id;
     private String email;
     private String password;
+    @Enumerated
+    private UserRole role;
     private String phone;
     private String name;
     private String surname;
@@ -46,6 +48,14 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public UserRole getRole() {
+        return role;
+    }
+
+    public void setRole(UserRole role) {
+        this.role = role;
     }
 
     public String getPhone() {
@@ -110,6 +120,7 @@ public class User {
                 .append(id, user.id)
                 .append(email, user.email)
                 .append(password, user.password)
+                .append(role, user.role)
                 .append(phone, user.phone)
                 .append(name, user.name)
                 .append(surname, user.surname)
@@ -123,10 +134,18 @@ public class User {
                 .append(id)
                 .append(email)
                 .append(password)
+                .append(role)
                 .append(phone)
                 .append(name)
                 .append(surname)
                 .append(organization)
                 .toHashCode();
+    }
+
+    public enum UserRole {
+        ADMIN,
+        CLIENT,
+        OPERATOR,
+        MANAGER
     }
 }

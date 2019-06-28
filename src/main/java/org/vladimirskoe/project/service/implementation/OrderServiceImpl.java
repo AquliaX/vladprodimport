@@ -1,17 +1,15 @@
 package org.vladimirskoe.project.service.implementation;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.vladimirskoe.project.dao.OrderRepository;
-import org.vladimirskoe.project.entity.Order;
-import org.vladimirskoe.project.entity.User;
-import org.vladimirskoe.project.exception.NullObjectException;
-import org.vladimirskoe.project.service.OrderService;
-
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.vladimirskoe.project.dao.OrderRepository;
+import org.vladimirskoe.project.entity.Order;
+import org.vladimirskoe.project.exception.NullObjectException;
+import org.vladimirskoe.project.service.OrderService;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -28,10 +26,6 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Order addOrder(final Order order) {
-        //add tmp User for order due to lack of implementation
-        User user = new User();
-        user.setId(1);
-        order.setUser(user);
         order.setDateTime(LocalDateTime.now());
         order.setOrderItems(order.getOrderItems()
                 .stream()
