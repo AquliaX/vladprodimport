@@ -13,5 +13,5 @@ app:
   jwtSecret: HfEGckFc4ZxlM9YbC-UxDOQRmofT85j5Xv74BdsfUTyEFRe1an-7mwlF6PYkfbpAf85k_l9qOs1lhC4JpdboAQ
   #  jwtExpirationInMs means how much time User will be have an access-token ,starting with auth
   #  (value in ms)
-  jwtExpirationInMs: 604800000
+  jwtExpirationInMs: 604800000  #value = token for 7 days
 
