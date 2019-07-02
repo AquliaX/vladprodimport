@@ -53,7 +53,7 @@ public class OrderController {
     }
 
     @GetMapping("/{id}")
-    public OrderDto getOrderById(@Valid @PathVariable Integer id) {
+    public OrderDto getOrderById(@PathVariable Integer id) {
         Order order = orderService.getOrderById(id);
         return orderConverter.fromOrderToDto(order);
     }
@@ -67,7 +67,7 @@ public class OrderController {
     }
 
     @PutMapping("/{id}")
-    public OrderDto updateOrder(@PathVariable Integer id, @RequestBody OrderDto orderDto) {
+    public OrderDto updateOrder(@PathVariable Integer id,@Valid @RequestBody OrderDto orderDto) {
         Order order = orderConverter.fromDtoToOrder(orderDto);
         orderService.updateOrder(id, order);
         return orderConverter.fromOrderToDto(order);

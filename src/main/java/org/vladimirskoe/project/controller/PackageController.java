@@ -1,16 +1,24 @@
 package org.vladimirskoe.project.controller;
 
+import java.util.List;
+import java.util.stream.Collectors;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 import org.vladimirskoe.project.converter.PackageConverter;
 import org.vladimirskoe.project.dto.PackageDto;
 import org.vladimirskoe.project.entity.Package;
 import org.vladimirskoe.project.service.PackageService;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/packages")
@@ -35,7 +43,7 @@ public class PackageController {
     }
 
     @GetMapping("/{id}")
-    public PackageDto getPackageById(@Valid @PathVariable Integer id) {
+    public PackageDto getPackageById(@PathVariable Integer id) {
         Package pack = packageService.getPackageById(id);
         return packageConverter.fromPackageToDto(pack);
     }
@@ -49,7 +57,8 @@ public class PackageController {
     }
 
     @PutMapping("/{id}")
-    public PackageDto updatePackage(@PathVariable Integer id, @RequestBody PackageDto packageDto) {
+    public PackageDto updatePackage(@PathVariable Integer id,
+            @Valid @RequestBody PackageDto packageDto) {
         Package pack = packageConverter.fromDtoToPackage(packageDto);
         packageService.updatePackage(id, pack);
         return packageConverter.fromPackageToDto(pack);

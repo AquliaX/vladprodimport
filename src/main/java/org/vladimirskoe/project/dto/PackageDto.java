@@ -2,6 +2,7 @@ package org.vladimirskoe.project.dto;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 
 public class PackageDto {
 
@@ -14,6 +15,7 @@ public class PackageDto {
     private ProductDto product;
 
     @NotNull(message = "Amount cannot be null")
+    @Positive
     private Integer amount;
 
     public Integer getId() {

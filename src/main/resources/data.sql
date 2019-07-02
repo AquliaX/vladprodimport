@@ -3,10 +3,10 @@ use vladprodimport_db;
 INSERT INTO Users
 (email,password,phone,name,surname,organization,role)
 VALUES
-('admin@mail.ru','12345678','+375(44)111-11-11','Andrew','admin', 'stud',0),
-('client@mail.ru','12345678','+375(44)111-11-11','Artem','client', 'stud',1),
-('operator@mail.ru','12345678','+375(44)111-11-11','Dima','operator', 'stud',2),
-('manager@mail.ru','12345678','+375(44)111-11-11','Slava','manager', 'stud',3);
+('admin@mail.ru','Admin123','+375(44)111-11-11','Andrew','admin', 'VladProdImport',0),
+('client@mail.ru','Client123','+375(44)111-11-11','Artem','client', 'stud',1),
+('operator@mail.ru','Operator123','+375(44)111-11-11','Dima','operator', 'VladProdImport',2),
+('manager@mail.ru','Manager123','+375(44)111-11-11','Slava','manager', 'VladProdImport',3);
 
 INSERT INTO Products
 (name,price,weight,type,producer,hcp)

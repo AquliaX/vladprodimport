@@ -2,6 +2,7 @@ package org.vladimirskoe.project.dto;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 
 public class ProductDto {
 
@@ -11,9 +12,11 @@ public class ProductDto {
     private String name;
 
     @NotNull(message = "Price cannot be null")
+    @Positive
     private Double price;
 
     @NotNull(message = "Weight cannot be null")
+    @Positive
     private Integer weight;
 
     @NotBlank(message = "Type cannot be null")
@@ -23,6 +26,7 @@ public class ProductDto {
     private String producer;
 
     @NotNull(message = "Hcp cannot be null")
+    @Positive
     private Double hcp;
 
     public Integer getId() {
