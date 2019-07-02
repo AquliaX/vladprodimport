@@ -1,5 +1,6 @@
 package org.vladimirskoe.project.controller;
 
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -27,14 +28,14 @@ public class ProductController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ProductDto addProduct(@RequestBody ProductDto productDto) {
+    public ProductDto addProduct(@Valid @RequestBody ProductDto productDto) {
         Product product = productConverter.fromDtoToProduct(productDto);
         productService.addProduct(product);
         return productConverter.fromProductToDto(product);
     }
 
     @GetMapping("/{id}")
-    public ProductDto getProductById(@PathVariable Integer id) {
+    public ProductDto getProductById(@Valid @PathVariable Integer id) {
         Product product = productService.getProductById(id);
         return productConverter.fromProductToDto(product);
     }

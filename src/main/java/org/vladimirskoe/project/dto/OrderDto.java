@@ -1,18 +1,27 @@
 package org.vladimirskoe.project.dto;
 
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-
 import java.time.LocalDateTime;
 import java.util.Set;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 public class OrderDto {
 
     private Integer id;
+
+    @NotNull(message = "UserId cannot be null")
     private Integer userId;
+
     private LocalDateTime dateTime;
+
     private String comment;
+
     private String state;
+
+    @NotNull(message = "OrderItems cannot be null")
+    @Size(min = 1)
     private Set<OrderItemDto> orderItems;
 
     public Integer getId() {

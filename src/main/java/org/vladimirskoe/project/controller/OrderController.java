@@ -2,6 +2,7 @@ package org.vladimirskoe.project.controller;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -42,7 +43,7 @@ public class OrderController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public OrderDto addOrder(@RequestBody OrderDto orderDto,
+    public OrderDto addOrder(@Valid @RequestBody OrderDto orderDto,
             @AuthenticationPrincipal UserDetails userDetails) {
         User user = userService.findUserByEmail(userDetails.getUsername());
         Order order = orderConverter.fromDtoToOrder(orderDto);
@@ -52,7 +53,7 @@ public class OrderController {
     }
 
     @GetMapping("/{id}")
-    public OrderDto getOrderById(@PathVariable Integer id) {
+    public OrderDto getOrderById(@Valid @PathVariable Integer id) {
         Order order = orderService.getOrderById(id);
         return orderConverter.fromOrderToDto(order);
     }

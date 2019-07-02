@@ -1,10 +1,19 @@
 package org.vladimirskoe.project.dto;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 public class PackageDto {
 
     private Integer id;
+
+    @NotBlank(message = "Product name cannot be null")
     private String name;
+
+    @NotNull(message = "Product cannot be null")
     private ProductDto product;
+
+    @NotNull(message = "Amount cannot be null")
     private Integer amount;
 
     public Integer getId() {

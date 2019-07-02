@@ -1,5 +1,6 @@
 package org.vladimirskoe.project.controller;
 
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -27,14 +28,14 @@ public class PackageController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public PackageDto addPackage(@RequestBody PackageDto packageDto) {
+    public PackageDto addPackage(@Valid @RequestBody PackageDto packageDto) {
         Package pack = packageConverter.fromDtoToPackage(packageDto);
         packageService.addPackage(pack);
         return packageConverter.fromPackageToDto(pack);
     }
 
     @GetMapping("/{id}")
-    public PackageDto getPackageById(@PathVariable Integer id) {
+    public PackageDto getPackageById(@Valid @PathVariable Integer id) {
         Package pack = packageService.getPackageById(id);
         return packageConverter.fromPackageToDto(pack);
     }

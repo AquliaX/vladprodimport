@@ -1,11 +1,16 @@
 package org.vladimirskoe.project.dto;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 public class OrderItemDto {
 
+    @NotBlank(message = "PackageID cannot be null")
     private Integer packageId;
+
+    @NotNull(message = "Amount cannot be null")
     private Integer amount;
 
     public Integer getPackageId() {

@@ -1,14 +1,38 @@
 package org.vladimirskoe.project.dto;
 
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Pattern.Flag;
+import javax.validation.constraints.Size;
 
 public class Registration {
 
+    @Email(message = "Email must be valid",
+            regexp = "\\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,4}\\b", flags = Flag.CASE_INSENSITIVE)
+    @Size(min = 1, max = 100)
     private String email;
+
+    @Size(min = 8,max = 32)
+    @Pattern(regexp = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\\s).*$",
+            message = "Password must be between 8 and 32 characters;"
+                    + "Password must contain at least 1 lowercase letter,"
+                    + "1 uppercase letter, 1 number ")
     private String password;
+
+    @NotBlank(message = "Passwords must match")
+    @Pattern(regexp = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\\s).*$")
     private String confirmPassword;
+
+    @NotBlank(message = "Phone cannot be null")
     private String phone;
+
+    @NotBlank(message = "Name cannot be null")
     private String name;
+
+    private String surname;
+
+    @NotBlank(message = "Organization cannot be null")
     private String organization;
 
     public String getEmail() {
@@ -51,6 +75,14 @@ public class Registration {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
 
     public String getOrganization() {
