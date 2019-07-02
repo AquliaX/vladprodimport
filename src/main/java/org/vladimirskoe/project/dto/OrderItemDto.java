@@ -1,11 +1,18 @@
 package org.vladimirskoe.project.dto;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 public class OrderItemDto {
 
+    @NotNull(message = "PackageID cannot be null")
+    @Positive
     private Integer packageId;
+
+    @NotNull(message = "Amount cannot be null")
+    @Positive
     private Integer amount;
 
     public Integer getPackageId() {
@@ -26,9 +33,13 @@ public class OrderItemDto {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
+        if (this == o) {
+            return true;
+        }
 
-        if (o == null || getClass() != o.getClass()) return false;
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         OrderItemDto that = (OrderItemDto) o;
 

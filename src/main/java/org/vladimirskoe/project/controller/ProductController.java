@@ -1,15 +1,24 @@
 package org.vladimirskoe.project.controller;
 
+import java.util.List;
+import java.util.stream.Collectors;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 import org.vladimirskoe.project.converter.ProductConverter;
 import org.vladimirskoe.project.dto.ProductDto;
 import org.vladimirskoe.project.entity.Product;
 import org.vladimirskoe.project.service.ProductService;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/products")
@@ -27,7 +36,7 @@ public class ProductController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ProductDto addProduct(@RequestBody ProductDto productDto) {
+    public ProductDto addProduct(@Valid @RequestBody ProductDto productDto) {
         Product product = productConverter.fromDtoToProduct(productDto);
         productService.addProduct(product);
         return productConverter.fromProductToDto(product);
@@ -48,7 +57,8 @@ public class ProductController {
     }
 
     @PutMapping("/{id}")
-    public ProductDto updateProduct(@PathVariable Integer id, @RequestBody ProductDto productDto) {
+    public ProductDto updateProduct(@PathVariable Integer id,
+            @Valid @RequestBody ProductDto productDto) {
         Product product = productConverter.fromDtoToProduct(productDto);
         productService.updateProduct(id, product);
         return productConverter.fromProductToDto(product);
