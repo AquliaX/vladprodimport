@@ -32,4 +32,15 @@ public class UserServiceImpl implements UserService {
     public Boolean existsUserByEmail(String email) {
         return userRepository.existsByEmail(email);
     }
+
+    @Override
+    public Boolean existsUserById(Integer id) {
+        return userRepository.existsById(id);
+    }
+
+    @Override
+    public User findUserById(Integer id) {
+        return userRepository.findById(id)
+                .orElseThrow(() -> new NullObjectException("User not found"));
+    }
 }

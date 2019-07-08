@@ -1,8 +1,8 @@
 package org.vladimirskoe.project.service;
 
-import org.vladimirskoe.project.entity.Order;
-
 import java.util.List;
+import org.vladimirskoe.project.entity.Order;
+import org.vladimirskoe.project.entity.User;
 
 public interface OrderService {
 
@@ -11,6 +11,8 @@ public interface OrderService {
     Order getOrderById(Integer id);
 
     List<Order> getAllOrders();
+
+    List<Order> getAllUserOrders(User user);
 
     Order updateOrder(Integer id, Order order);
 

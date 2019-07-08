@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.vladimirskoe.project.dao.OrderRepository;
 import org.vladimirskoe.project.entity.Order;
+import org.vladimirskoe.project.entity.User;
 import org.vladimirskoe.project.exception.NullObjectException;
 import org.vladimirskoe.project.service.OrderService;
 
@@ -43,6 +44,11 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public List<Order> getAllOrders() {
         return (List<Order>) orderRepository.findAll();
+    }
+
+    @Override
+    public List<Order> getAllUserOrders(User user) {
+        return orderRepository.findByUser(user);
     }
 
     @Override

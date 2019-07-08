@@ -106,13 +106,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.PUT, "/api/packages/{id}")
                      .hasAnyAuthority(ROLE_ADMIN, ROLE_MANAGER)
 
-                .antMatchers(HttpMethod.GET, "/api/orders**")
+                .antMatchers(HttpMethod.GET, "/api/orders")
+                    .hasAnyAuthority(ROLE_ADMIN, ROLE_OPERATOR)
+                .antMatchers(HttpMethod.GET, "/api/orders/{id}")
+                .hasAnyAuthority(ROLE_ADMIN, ROLE_OPERATOR)
+
+                .antMatchers(HttpMethod.GET, "/api/users/{userId}/orders")
                     .hasAnyAuthority(ROLE_ADMIN, ROLE_OPERATOR, ROLE_CLIENT)
-                .antMatchers(HttpMethod.POST, "/api/orders")
+                .antMatchers(HttpMethod.GET, "/api/users/{userId}/orders/{orderId}")
                     .hasAnyAuthority(ROLE_ADMIN, ROLE_OPERATOR, ROLE_CLIENT)
-                .antMatchers(HttpMethod.DELETE, "/api/orders/{id}")
+                .antMatchers(HttpMethod.POST, "/api/users/{userId}/orders")
                     .hasAnyAuthority(ROLE_ADMIN, ROLE_OPERATOR, ROLE_CLIENT)
-                .antMatchers(HttpMethod.PUT, "/api/orders/{id}")
+                .antMatchers(HttpMethod.DELETE, "/api/users/{userId}/orders/{orderId}")
+                    .hasAnyAuthority(ROLE_ADMIN, ROLE_OPERATOR, ROLE_CLIENT)
+                .antMatchers(HttpMethod.PUT, "/api/users/{userId}/orders/{orderId}")
                     .hasAnyAuthority(ROLE_ADMIN, ROLE_OPERATOR, ROLE_CLIENT);
 
         http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);

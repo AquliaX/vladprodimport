@@ -3,7 +3,6 @@ package org.vladimirskoe.project.dto;
 import java.time.LocalDateTime;
 import java.util.Set;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -12,8 +11,6 @@ public class OrderDto {
 
     private Integer id;
 
-    @NotNull(message = "UserId cannot be null")
-    @Positive
     private Integer userId;
 
     private LocalDateTime dateTime;
